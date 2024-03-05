@@ -31,15 +31,11 @@ def parse_matrix(matrix_string: str):
     return matrix
 
 
-# Nie działa
 def parse_adjacency_list(list_string: str): 
     adjacency_list = {}
     
-    for line in list_string.split(r"\n|;"):
-        if not line.isdigit():
-            raise ValueError("Non-integer value in list")
-        
-        vertex, *adjacent_vertices = map(int, line.split(r",| "))
+    for line in list_string.splitlines():
+        vertex, *adjacent_vertices = map(int, re.split(r",| ", line))
         adjacency_list[vertex] = adjacent_vertices
     
     return adjacency_list
